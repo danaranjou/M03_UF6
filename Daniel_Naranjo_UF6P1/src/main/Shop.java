@@ -14,7 +14,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime; 
+import java.time.LocalDateTime;
 
 public class Shop {
 	private Amount cash = new Amount(100.00, "€	");
@@ -124,6 +124,7 @@ public class Shop {
 			Amount am = new Amount(0.00, "€");
 			boolean available = true;
 			int stock = 0;
+			boolean deluxe = true;
 
 			for (int i = 0; i < partes1.length; i++) {
 				String[] partes2 = partes1[i].split(":");
@@ -150,7 +151,7 @@ public class Shop {
 				}
 
 			}
-			Product p1 = new Product(name, am, available, stock);
+			Product p1 = new Product(name, am, available, stock, deluxe);
 			inventory.add(p1);
 
 			miLinea = br.readLine();
@@ -189,7 +190,7 @@ public class Shop {
 			System.out.print("Stock: ");
 			int stock = scanner.nextInt();
 
-			inventory.add(new Product(name, new Amount(wholesalerPrice, "€"), true, stock));
+			inventory.add(new Product(name, new Amount(wholesalerPrice, "€"), true, stock, false));
 			numberProducts++;
 		} else {
 			System.out.println("El producto ya existe en el inventario.");
@@ -335,8 +336,11 @@ public class Shop {
 			boolean deber = client.pay(totalAmount);
 			if (!deber) {
 				// lo que debe el cliente
-				System.out.println("el cliente " + client.getName() + " debe " + (client.getCantidad().getValue() * -1.00 ) + "€");
-			}else {System.out.println("el cliente queda con " + client.getCantidad().getValue() + " en su cuenta");}
+				System.out.println(
+						"el cliente " + client.getName() + " debe " + (client.getCantidad().getValue() * -1.00) + "€");
+			} else {
+				System.out.println("el cliente queda con " + client.getCantidad().getValue() + " en su cuenta");
+			}
 		} else {
 			System.out.println("Venta no realizada.");
 		}
@@ -496,7 +500,8 @@ public class Shop {
 		} while (!finish);
 		System.out.println("Sesión iniciada correctamente");
 	}
-        public Amount getCash(){
-        return cash;
-        }
+
+	public Amount getCash() {
+		return cash;
+	}
 }

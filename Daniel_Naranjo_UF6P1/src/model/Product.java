@@ -10,10 +10,11 @@ public class Product {
     private boolean available;
     private int stock;
     private static int totalProducts;
+    private boolean deluxe;
     
     final static double EXPIRATION_RATE=0.60;
     
-	public Product(String name, Amount wholesalerPrice, boolean available, int stock) {
+	public Product(String name, Amount wholesalerPrice, boolean available, int stock, boolean deluxe) {
 		super();
 		this.id = totalProducts + 1;
 		this.name = name;
@@ -22,6 +23,7 @@ public class Product {
 		this.publicPrice.setValue(getWholesalerPrice().getValue() * 2);
 		this.available = available;
 		this.stock = stock;
+		this.deluxe = deluxe;
 		totalProducts++;
 	}
 
@@ -72,6 +74,14 @@ public class Product {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	
+	public boolean isDeluxe() {
+		return deluxe;
+	}
+	
+	public void setDeluxe(boolean deluxe) {
+		this.deluxe = deluxe;
+	}
 
 	public static int getTotalProducts() {
 		return totalProducts;
@@ -85,12 +95,11 @@ public class Product {
 		this.publicPrice.setValue(getPublicPrice().getValue() * EXPIRATION_RATE);
 		//double = double * double;
 		// set(Amount) = Amount.double * double;
-		
 	}
 
 	@Override
 	public String toString() {
 		return "Product --> Name = " + name + " | Public Price = " + publicPrice + " | Whole Saler Price = " + wholesalerPrice
-				+ " | Available = " + available + " | Stock = " + stock;
+				+ " | Available = " + available + " | Stock = " + stock + " | Deluxe = " + deluxe;
 	}
 }

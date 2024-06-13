@@ -6,7 +6,7 @@ public class Amount {
 
     public Amount(double value, String currency) {
         this.value = value;
-        this.currency = "â‚¬";
+        this.currency = "€";
     }
 
     public double getValue() {
